@@ -7,7 +7,7 @@ import { history } from 'umi';
 import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
 import type { ResponseError } from 'umi-request';
-import { queryCurrent } from './services/user';
+import { queryCurrentUser } from './services/user';
 import defaultSettings from '../config/defaultSettings';
 
 /**
@@ -24,7 +24,8 @@ export async function getInitialState(): Promise<{
 }> {
   const fetchUserInfo = async () => {
     try {
-      const currentUser = await queryCurrent();
+      const currentUser = await queryCurrentUser();
+      console.log(currentUser);
       return currentUser;
     } catch (error) {
       history.push('/user/login');
@@ -88,6 +89,8 @@ const codeMessage = {
  * 异常处理程序
  */
 const errorHandler = (error: ResponseError) => {
+  console.log(error);
+
   const { response } = error;
   if (response && response.status) {
     const errorText = codeMessage[response.status] || response.statusText;
@@ -99,12 +102,20 @@ const errorHandler = (error: ResponseError) => {
     });
   }
 
-  if (!response) {
+  if (error.name !== 'BizError' && !response) {
     notification.error({
-      description: '您的网络发生异常，无法连接服务器',
       message: '网络异常',
+      description: '您的网络发生异常，无法连接服务器',
     });
   }
+
+  if (error.data.isShowError) {
+    notification.error({
+      message: '服务器一个失败的结果',
+      description: error.data.errorMessage,
+    });
+  }
+
   throw error;
 };
 

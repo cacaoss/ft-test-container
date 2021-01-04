@@ -1,7 +1,7 @@
 declare namespace API {
   export type CurrentUser = {
     avatar?: string;
-    name?: string;
+    userName?: string;
     title?: string;
     group?: string;
     signature?: string;
@@ -10,7 +10,7 @@ declare namespace API {
       label: string;
     }[];
     userid?: string;
-    access?: 'user' | 'guest' | 'admin';
+    userLevel?: 'user' | 'guest' | 'admin';
     unreadCount?: number;
   };
 

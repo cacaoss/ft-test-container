@@ -55,4 +55,5 @@ export default defineConfig({
   resolve: {
     includes: ['src/components'],
   },
+  devtool: 'source-map',
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
-import { Card, Alert, Typography } from 'antd';
+import { Card, Alert, Typography, Button, message } from 'antd';
 import { useIntl, FormattedMessage } from 'umi';
 import styles from './Welcome.less';
 
@@ -14,6 +14,11 @@ const CodePreview: React.FC = ({ children }) => (
 
 export default (): React.ReactNode => {
   const intl = useIntl();
+
+  const onClickHandle = async () => {
+    message.success('OK', 1);
+  };
+
   return (
     <PageContainer>
       <Card>
@@ -58,6 +63,9 @@ export default (): React.ReactNode => {
         </Typography.Text>
         <CodePreview>yarn add @ant-design/pro-layout</CodePreview>
       </Card>
+      <Button type="primary" onClick={onClickHandle}>
+        点击
+      </Button>
     </PageContainer>
   );
 };
