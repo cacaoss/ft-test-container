@@ -16,14 +16,30 @@
     ],
   },
   {
-    path: '/welcome',
+    name: 'setting',
+    path: '/setting',
+    icon: 'setting',
+    routes: [
+      {
+        path: '/setting',
+        redirect: '/setting/userSetting',
+      },
+      {
+        name: 'userSetting',
+        path: '/setting/userSetting',
+        component: './Setting/UserSetting',
+      },
+    ],
+  },
+  {
     name: 'welcome',
+    path: '/welcome',
     icon: 'smile',
     component: './Welcome',
   },
   {
-    path: '/admin',
     name: 'admin',
+    path: '/admin',
     icon: 'crown',
     access: 'canAdmin',
 
@@ -33,8 +49,8 @@
         redirect: '/admin/sub-page',
       },
       {
-        path: '/admin/sub-page',
         name: 'sub-page',
+        path: '/admin/sub-page',
         icon: 'smile',
         component: './Welcome',
       },
@@ -42,8 +58,8 @@
   },
   {
     name: 'list.table-list',
-    icon: 'table',
     path: '/list',
+    icon: 'table',
     component: './TableList',
   },
   {
