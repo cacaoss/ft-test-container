@@ -52,4 +52,7 @@ export default {
 
   'menu.setting': '设置',
   'menu.setting.userSetting': '用户设置',
+
+  'menu.space': '库位',
+  'menu.space.spaceDashboard': '库位看板',
 };

@@ -16,6 +16,22 @@
     ],
   },
   {
+    name: 'space',
+    path: '/space',
+    icon: 'smile',
+    routes: [
+      {
+        path: '/space',
+        redirect: '/space/spaceDashboard',
+      },
+      {
+        name: 'spaceDashboard',
+        path: '/space/spaceDashboard',
+        component: './Space/SpaceDashboard',
+      },
+    ],
+  },
+  {
     name: 'setting',
     path: '/setting',
     icon: 'setting',
