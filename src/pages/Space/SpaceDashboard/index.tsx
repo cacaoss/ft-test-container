@@ -95,7 +95,7 @@ const SpaceDashboard: React.FC = () => {
                         id={'MENU_RIGHT'}
                         holdToDisplay={-1}
                         collect={(props) => ({ name: props.name })}
-                        name={item.spaceName}
+                        {...{ name: item.spaceName }}
                       >
                         <Space direction="vertical" size={1}>
                           <Title level={4}>{item.spaceName}</Title>
