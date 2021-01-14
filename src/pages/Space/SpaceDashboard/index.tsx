@@ -5,6 +5,8 @@ import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import styles from './index.less';
 import './contextmenu.css';
 
+import InputDialog from './components/InputDialog';
+
 const { Title, Text } = Typography;
 
 const handleClick = (e: any, data: any) => {
@@ -38,6 +40,9 @@ const calcClassName = (item: any) => {
 };
 
 const SpaceDashboard: React.FC = () => {
+  const [inputDialogVisible, setInputDialogVisible] = React.useState<boolean>(false);
+  const [inputSpaceName, setInputSpaceName] = React.useState<string>('');
+
   const resData: {
     spaceName: string;
     isEnable: boolean;
@@ -90,7 +95,17 @@ const SpaceDashboard: React.FC = () => {
               if (item && item.spaceName) {
                 return (
                   <List.Item key={item.spaceName}>
-                    <Card hoverable className={calcClassName(item)} bodyStyle={{ fontSize: 16 }}>
+                    <Card
+                      hoverable
+                      className={calcClassName(item)}
+                      bodyStyle={{ fontSize: 16 }}
+                      onClick={() => {
+                        if (true) {
+                          setInputSpaceName(item.spaceName);
+                          setInputDialogVisible(true);
+                        }
+                      }}
+                    >
                       <ContextMenuTrigger
                         id={'MENU_RIGHT'}
                         holdToDisplay={-1}
@@ -123,6 +138,17 @@ const SpaceDashboard: React.FC = () => {
           清除状态
         </MenuItem>
       </ContextMenu>
+      <InputDialog
+        value={inputSpaceName}
+        inputDialogVisible={inputDialogVisible}
+        onCancel={() => {
+          setInputDialogVisible(false);
+        }}
+        onSubmit={async (values) => {
+          setInputDialogVisible(false);
+          console.log('values', values);
+        }}
+      ></InputDialog>
     </PageContainer>
   );
 };
