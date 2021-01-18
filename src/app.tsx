@@ -10,6 +10,7 @@ import type { ResponseError } from 'umi-request';
 import { queryCurrentUser } from './services/user';
 import defaultSettings from '../config/defaultSettings';
 
+import proLogo from '../public/prologo.png';
 /**
  * 获取用户信息比较慢的时候会展示一个 loading
  */
@@ -50,6 +51,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
     rightContentRender: () => <RightContent />,
     disableContentMargin: false,
     footerRender: () => <Footer />,
+    logo: () => <img src={proLogo} alt="logo" />,
     onPageChange: () => {
       const { location } = history;
       // 如果没有登录，重定向到 login

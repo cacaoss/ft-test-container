@@ -1,14 +1,13 @@
 import React from 'react';
-import { List, Card, Typography, Space, message } from 'antd';
+import { Input, List, Card, Typography, Space, message } from 'antd';
 import { PageContainer } from '@ant-design/pro-layout';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
+import { querySpaceList } from './service';
 import styles from './index.less';
 import './contextmenu.css';
-
 import InputDialog from './components/InputDialog';
 
 const { Title, Text } = Typography;
-
 const handleClick = (e: any, data: any) => {
   if (data.action.toLowerCase() === 'addsn') {
     message.info(`${data.name} 添加条码`);
@@ -16,7 +15,6 @@ const handleClick = (e: any, data: any) => {
     message.info(`${data.name} 清除库位`);
   }
 };
-
 const calcClassName = (item: any) => {
   let className = styles.card;
 
@@ -38,50 +36,46 @@ const calcClassName = (item: any) => {
 
   return className;
 };
-
 const SpaceDashboard: React.FC = () => {
   const [inputDialogVisible, setInputDialogVisible] = React.useState<boolean>(false);
   const [inputSpaceName, setInputSpaceName] = React.useState<string>('');
+  const [resData, setResData] = React.useState<any>(null);
+  const searchSpaceName = React.useRef<string>('');
 
-  const resData: {
-    spaceName: string;
-    isEnable: boolean;
-    haveBoard: boolean;
-    havePower1: boolean;
-    havePower2: boolean;
+  const handleFormSubmit = (value: string) => {
+    searchSpaceName.current = value;
+    console.log(value);
+  };
 
-    locationStatu?: number;
-    contralStatu?: number;
+  const mainSearch = (
+    <div style={{ textAlign: 'right' }}>
+      <Input.Search
+        placeholder="请输入库位名"
+        enterButton="搜索"
+        size="middle"
+        onSearch={handleFormSubmit}
+        style={{ maxWidth: 300, width: '100%' }}
+      />
+    </div>
+  );
 
-    productSn?: string;
-    traySn?: string;
-    inputTime?: string;
-  }[] = [
-    {
-      spaceName: '仓位1',
-      isEnable: true,
-      haveBoard: true,
-      havePower1: true,
-      havePower2: true,
-
-      locationStatu: 1,
-      contralStatu: 2,
-
-      productSn: '123',
-      traySn: '456',
-      inputTime: '2021-01-12 10:30:00',
-    },
-    {
-      spaceName: '仓位2',
-      isEnable: true,
-      haveBoard: false,
-      havePower1: false,
-      havePower2: false,
-    },
-  ];
+  React.useEffect(() => {
+    const timerId = setInterval(async () => {
+      const response = await querySpaceList(searchSpaceName.current);
+      if (response.success) {
+        setResData(response.data);
+        return;
+      }
+      setResData(null);
+      clearInterval(timerId);
+    }, 1000);
+    return () => {
+      clearInterval(timerId);
+    };
+  }, []);
 
   return (
-    <PageContainer>
+    <PageContainer content={mainSearch}>
       <div className={styles.cardList}>
         {resData ? (
           <List
