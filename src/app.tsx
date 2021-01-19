@@ -111,7 +111,7 @@ const errorHandler = (error: ResponseError) => {
 
   if (error.data.isShowError) {
     notification.error({
-      message: '服务器一个失败的结果',
+      message: '服务器返回一个失败的结果',
       description: error.data.errorMessage,
     });
   }
