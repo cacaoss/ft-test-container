@@ -31,8 +31,8 @@ const InputDialog: React.FC<InputDialogProps> = (props) => {
 
       form.resetFields();
       onSubmit({ value, productSn, traySn });
-    } catch (err) {
-      console.log(err);
+    } catch {
+      console.log('');
     }
   };
 

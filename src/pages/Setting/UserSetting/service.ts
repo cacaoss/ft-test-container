@@ -2,7 +2,7 @@ import { request } from 'umi';
 import type { UserListParams } from './data.d';
 
 export async function queryRule(params: UserListParams) {
-  return await request('/api/user/GetUserList', {
+  return request('/api/user/GetUserList', {
     params,
   });
 }

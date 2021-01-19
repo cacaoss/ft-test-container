@@ -8,7 +8,8 @@ import {
 
 import { PageContainer } from '@ant-design/pro-layout';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
-import { querySpaceList, setSpaceClear, setSpaceSn } from './service';
+import { querySpaceList } from '@/services/space';
+import { setSpaceClear, setSpaceSn } from './service';
 import styles from './index.less';
 import './contextmenu.css';
 import InputDialog from './components/InputDialog';
@@ -100,7 +101,6 @@ const SpaceDashboard: React.FC = () => {
 
   const handleSearchSubmit = async (value: string) => {
     searchSpaceName.current = value;
-    console.log(value);
   };
   const handleAddSnSubmit = async (values: {
     spaceName: string;
@@ -138,7 +138,6 @@ const SpaceDashboard: React.FC = () => {
         clearInterval(timerId);
         setResData(null);
       } catch {
-        console.log('关闭');
         clearInterval(timerId);
         setResData(null);
       }

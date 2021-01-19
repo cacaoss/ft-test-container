@@ -29,6 +29,11 @@
         path: '/space/spaceDashboard',
         component: './Space/SpaceDashboard',
       },
+      {
+        name: 'spaceDebug',
+        path: '/space/spaceDebug',
+        component: './Space/SpaceDebug',
+      },
     ],
   },
   {
