@@ -56,4 +56,7 @@ export default {
   'menu.space': '库位',
   'menu.space.spaceDashboard': '库位看板',
   'menu.space.spaceDebug': '调试页面',
+
+  'menu.record': '记录',
+  'menu.record.faultSolveRecord': '操作记录',
 };

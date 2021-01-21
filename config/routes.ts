@@ -37,6 +37,22 @@
     ],
   },
   {
+    name: 'record',
+    path: '/record',
+    icon: 'table',
+    routes: [
+      {
+        path: '/record',
+        redirect: '/record/faultSolveRecord',
+      },
+      {
+        name: 'faultSolveRecord',
+        path: '/record/faultSolveRecord',
+        component: './Record/FaultSolveRecord',
+      },
+    ],
+  },
+  {
     name: 'setting',
     path: '/setting',
     icon: 'setting',
@@ -77,15 +93,10 @@
       },
     ],
   },
-  {
-    name: 'list.table-list',
-    path: '/list',
-    icon: 'table',
-    component: './TableList',
-  },
+
   {
     path: '/',
-    redirect: '/welcome',
+    redirect: '/space',
   },
   {
     component: './404',
