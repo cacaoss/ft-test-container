@@ -69,32 +69,6 @@
     ],
   },
   {
-    name: 'welcome',
-    path: '/welcome',
-    icon: 'smile',
-    component: './Welcome',
-  },
-  {
-    name: 'admin',
-    path: '/admin',
-    icon: 'crown',
-    access: 'canAdmin',
-
-    routes: [
-      {
-        path: '/admin',
-        redirect: '/admin/sub-page',
-      },
-      {
-        name: 'sub-page',
-        path: '/admin/sub-page',
-        icon: 'smile',
-        component: './Welcome',
-      },
-    ],
-  },
-
-  {
     path: '/',
     redirect: '/space',
   },
