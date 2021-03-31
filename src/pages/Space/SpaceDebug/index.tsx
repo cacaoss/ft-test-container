@@ -3,13 +3,7 @@ import { Form, Card, Row, Col, Input, Button, Select, Radio, message } from 'ant
 
 import { PageContainer } from '@ant-design/pro-layout';
 import { querySpaceList } from '@/services/space';
-import {
-  queryDistance,
-  SetPowerStatu,
-  SetLightValue,
-  SetMoveSpace,
-  SetManualSpace,
-} from './service';
+import { queryDistance, SetPowerStatu, SetLightValue, SetManualSpace } from './service';
 import styles from './index.less';
 
 const DistanceDebug: React.FC = () => {
@@ -21,8 +15,7 @@ const DistanceDebug: React.FC = () => {
       if (response.success) {
         message.success('查询距离成功');
       }
-
-      form.setFieldsValue({ distance1: 10, distance2: 20 });
+      form.setFieldsValue({ distance1: response.distance1, distance2: response.distance2 });
     } catch {
       message.error('查询距离失败');
       form.setFieldsValue({ distance1: 0, distance2: 0 });
@@ -84,7 +77,7 @@ const PowerDebug: React.FC<{ options: any }> = (props) => {
       requiredMark={false}
       form={form}
       layout={'horizontal'}
-      initialValues={{ powerIndex: '0' }}
+      initialValues={{ powerIndex: '11' }}
     >
       <Card title="供电调试" className={styles.card}>
         <Row>
@@ -103,9 +96,9 @@ const PowerDebug: React.FC<{ options: any }> = (props) => {
           <Col span={24}>
             <Form.Item label={'请选择电源端口'} name="powerIndex">
               <Radio.Group>
-                <Radio value="0">所有电源口</Radio>
-                <Radio value="1">1号电源口</Radio>
-                <Radio value="2">2号电源口</Radio>
+                <Radio value="11">所有电源口</Radio>
+                <Radio value="10">1号电源口</Radio>
+                <Radio value="01">2号电源口</Radio>
               </Radio.Group>
             </Form.Item>
           </Col>
@@ -187,8 +180,6 @@ const LightDebug: React.FC = () => {
             <Form.Item label={'选择光源'} name="lightIndex">
               <Radio.Group>
                 <Radio value="0">所有光源</Radio>
-                <Radio value="1">前面板光源</Radio>
-                <Radio value="2">后面板光源</Radio>
               </Radio.Group>
             </Form.Item>
           </Col>
@@ -214,6 +205,7 @@ const LightDebug: React.FC = () => {
     </Form>
   );
 };
+/*
 const MoveSpace: React.FC<{ options: any }> = (props) => {
   const [form] = Form.useForm();
   const { options } = props;
@@ -276,6 +268,7 @@ const MoveSpace: React.FC<{ options: any }> = (props) => {
     </Form>
   );
 };
+*/
 const ManualSpace: React.FC<{ options: any }> = (props) => {
   const [form] = Form.useForm();
   const { options } = props;
@@ -385,9 +378,6 @@ const SpaceDebug: React.FC = () => {
         </Col>
       </Row>
       <Row gutter={[24, 24]}>
-        <Col span={8}>
-          <MoveSpace options={options} />
-        </Col>
         <Col span={8}>
           <ManualSpace options={options} />
         </Col>
